@@ -1,0 +1,22 @@
+Entity extraction:
+
+Given a document, extracts points of interest from the document.
+
+Points of interest might include:
+
+* phone #s
+* addresses
+* names of people / companies / places
+* sentence boundaries
+* dates and times (both specific and relative)
+* shipment tracking numbers
+* flight confirmation numbers
+
+The rough API is:
+
+extract(str)
+
+and returns
+
+[{'start': 10, 'end': 18, 'type': 'phonenumber'}, ...]
+
