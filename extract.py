@@ -1,7 +1,29 @@
+import re
+
+phonenumberregex = '(?:1[.\- ]?)?' # country code
+phonenumberregex += '\(?[\dA-Z]{3}\)?[.\- ]?' # area code
+phonenumberregex += '[\dA-Z]{3}[.\- ]?[\dA-Z]{4}' # and the rest
+phonenumber = re.compile(phonenumberregex)
+
 def extract(document):
     '''
         input: document, the string to be indexed
         ouput: a list of dicts, each indicating the start and end point
                    and type of a found entity
     '''
-    return []
+    entities = []
+    for m in phonenumber.finditer(document):
+        entities += [{'start': m.start(), 'end': m.end(), 'type': 'phonenumber'}]
+    return entities
+
+def extractfile(filename):
+    '''
+        input: filename, a stringe with the document to be indexed
+        ouput: a list of dicts, each indicating the start and end point
+                   and type of a found entity
+        This is mostly to make it easy to test extract()
+    '''
+    f = open(filename, 'r')
+    document = f.read()
+    f.close()
+    return extract(document)
