@@ -13,6 +13,8 @@ def extract(document):
         entities += [{'start': m.start(), 'end': m.end(), 'type': 'address'}]
     for m in extractregexes.flightconfirmation.finditer(document):
         entities += [{'start': m.start(), 'end': m.end(), 'type': 'flightconfirmation'}]
+    for m in extractregexes.time.finditer(document):
+        entities += [{'start': m.start(), 'end': m.end(), 'type': 'time'}]
     return entities
 
 def extractfile(filename):
@@ -39,3 +41,13 @@ def checksubfile(filename, start, end):
     f.close()
     return document[start:end]
     
+def testfile(filename):
+    '''
+        input: filename, a string with the document to check
+        output: none; prints found entities to stdout
+        Some easy scaffolding to check outputs
+    '''
+    entities = extractfile(filename)
+    for i in entities:
+        print i['type'], ":"
+        print checksubfile(filename, i['start'], i['end'])

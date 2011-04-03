@@ -49,6 +49,5 @@ sixties = r"[0-5]\d"
 timezones = r"[ECMPAH][DS]T|(?:Eastern|Central|Mountain|Pacific|Alaskan|Hawaiian)(?: Standard| Daylight)?(?: Time)?"
 
 timeregex = r"\b(?:" + hours + r")(?::" + sixties + r"(?::" + sixties + r")?)?\s*[ap]?m?\s*(?:" + timezones + r")?\b"
-print timeregex
 time = re.compile(timeregex, re.I)
 
